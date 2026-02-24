@@ -1,0 +1,4 @@
+SELECT *, ROW_NUMBER() OVER(PARTITION BY column_name1) AS alias
+FROM table;
+
+
