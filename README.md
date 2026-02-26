@@ -19,6 +19,14 @@ WHERE name LIKE "%Z%";
 This allows you to first see the outcome before making any permanent changes.
 
 
+
+
 ##Reminder 2: 
 
 Always create staging tables for editing and data cleaning. Never edit the main raw data table. 
+
+
+
+##Reminder 3: 
+
+Use JOINS to fill NULL/Blank Values
