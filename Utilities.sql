@@ -1,10 +1,13 @@
-##### 1. Locate MySQL Folder Upload Point
+############### 1. Locate MySQL Folder Upload Point
 -- 		This usually returns C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/
 
 SHOW VARIABLES LIKE "secure_file_priv"; 
 
 
-##### 2. Importing Data from MySQL Folder
+
+
+
+############### 2. Importing Data from MySQL Folder
 -- 		CHARACTER SET utf8mb4 = Enables special Characters like Ñ/ñ. 
 -- 		IGNORE 1 ROWS = Ignores 1 row (assumed as the Title Headers) when importing Data
 -- 		'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/file_name' = Folder Path for file
@@ -19,9 +22,44 @@ IGNORE 1 ROWS
 (column1, column2, column3, etc);
 
 
-##### 3. To figure out if your file uses Windows (\r\n) or Unix (\n) line endings. Run this on Powershell 
+
+
+
+############### 3. To figure out if your file uses Windows (\r\n) or Unix (\n) line endings. Run this on Powershell 
 --> "Unix (LF)" - Change your SQL script to use: LINES TERMINATED BY '\n'
 --> "Windows (CRLF)" - Keep your SQL script as:  LINES TERMINATED BY '\r\n'
   
 Get-Content "C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\csv_file" -Raw | ForEach-Object { if ($_ -match "\r\n") { "Windows (CRLF)" } else { "Unix (LF)" } }
 -- Change "csv_file" to the name of the csv file or add the folder directory then the file name with the extension.
+
+
+
+
+
+############### 4. Importing CSV Data with GeoJSON/Geometric values like longitudes and latitudes 
+-- Example: CSV Column has this value for longitude/latitude =      '{"type": "Point", "coordinates": [20.520641, 44.638223]}'
+-- The value is GeoJSON
+  
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/file_name' 
+INTO TABLE `terminal` 
+CHARACTER SET utf8mb4 
+FIELDS TERMINATED BY ',' 
+OPTIONALLY ENCLOSED BY '"' -- "Optionally" is key for mixed text/JSON
+LINES TERMINATED BY '\n' 
+IGNORE 1 ROWS 
+(column1, column2, @temp_column3) -- "@temp_" Loads the GeoJSON string into a variable first
+SET `port_location` = ST_GeomFromGeoJSON(@temp_port_location);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
