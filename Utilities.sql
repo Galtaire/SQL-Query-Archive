@@ -19,3 +19,9 @@ IGNORE 1 ROWS
 (column1, column2, column3, etc);
 
 
+##### 3. To figure out if your file uses Windows (\r\n) or Unix (\n) line endings. Run this on Powershell 
+--> "Unix (LF)" - Change your SQL script to use: LINES TERMINATED BY '\n'
+--> "Windows (CRLF)" - Keep your SQL script as:  LINES TERMINATED BY '\r\n'
+  
+Get-Content "C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\csv_file" -Raw | ForEach-Object { if ($_ -match "\r\n") { "Windows (CRLF)" } else { "Unix (LF)" } }
+-- Change "csv_file" to the name of the csv file or add the folder directory then the file name with the extension.
