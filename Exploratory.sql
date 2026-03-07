@@ -1,12 +1,13 @@
+#################### 1. For analyzing Geometric Data Values 
+-- Returns the raw value and the readable value. Useful when the GeoJSON Data/Geometry Data returns "BLOB"
 
-########## 1. For analyzing Geometric Data Values 
 SELECT 
     `column1`,
     ST_asText(`column2`) AS readable_location, -- Shows as POINT(long lat)
     ST_AsGeoJSON(`column2`) AS original_json   -- Shows back as JSON
 FROM table_name;
 
-
+-- Returns X and Y Values
 SELECT 
     `column1`,
     ST_X(`column2`) AS longitude,
