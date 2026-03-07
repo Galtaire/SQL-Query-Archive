@@ -29,8 +29,9 @@ IGNORE 1 ROWS
 --> "Unix (LF)" - Change your SQL script to use: LINES TERMINATED BY '\n'
 --> "Windows (CRLF)" - Keep your SQL script as:  LINES TERMINATED BY '\r\n'
   
-Get-Content "C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\csv_file" -Raw | ForEach-Object { if ($_ -match "\r\n") { "Windows (CRLF)" } else { "Unix (LF)" } }
--- Change "csv_file" to the name of the csv file or add the folder directory then the file name with the extension.
+Get-Content "C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\csv_file.csv" -Raw | ForEach-Object { if ($_ -match "\r\n") { "Windows (CRLF)" } else { "Unix (LF)" } }
+-- Change "csv_file.csv" to the name of the csv file or add the folder directory then the file name with the extension.
+-- Do not forget the file extension (.csv)
 
 
 
