@@ -42,7 +42,7 @@ Get-Content "C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\csv_file.csv" -Raw | 
 -- The value is GeoJSON
   
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/file_name' 
-INTO TABLE `terminal` 
+INTO TABLE `table_name` 
 CHARACTER SET utf8mb4 
 FIELDS TERMINATED BY ',' 
 OPTIONALLY ENCLOSED BY '"' -- "Optionally" is key for mixed text/JSON
@@ -53,6 +53,20 @@ SET `port_location` = ST_GeomFromGeoJSON(@temp_port_location);
 
 
 
+
+############### 4. Importing CSV Data (ignoring extra columns
+-- CSV has 5 columns while your table has 6. This ignores that extra column
+  
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/file_name' 
+INTO TABLE `your_table`
+CHARACTER SET utf8mb4 
+FIELDS TERMINATED BY ',' 
+OPTIONALLY ENCLOSED BY '"' -- "Optionally" is key for mixed text/JSON
+LINES TERMINATED BY '\n' 
+IGNORE 1 ROWS
+(col_from_csv_1, col_from_csv_2, col_from_csv_3) -- These match the file
+SET 
+  id = NULL,              -- Generates Auto-Increment. This column is not in CSV. Adding this makes the column ignored in the Import Phase
 
 
 
