@@ -56,6 +56,21 @@ WHERE t1.column3 IS NULL
 
 
 
+### 4. Adding a Primary Key + Column to the staging table.
+-- Use FIRST after PRIMARY KEY instead of putting the table name. This makes the column as the first column in the table.
+-- Note: In this case, no need to put the column name aafter FIRST. This already makes the generated column first. (best for making Primary Keys) 
+
+	ALTER TABLE table_name
+ADD `column_name` data_type
+PRIMARY KEY FIRST;
+
+-- Use the AFTER statement to put the column after an established column 
+-- This puts the generated column after the specified column in AFTER. 
+
+ALTER TABLE table_name
+ADD `column1_name` data_type
+PRIMARY KEY AFTER `column2_name`;
+
 
 
 
