@@ -54,6 +54,7 @@ SET `port_location` = ST_GeomFromGeoJSON(@temp_port_location);
 
 
 
+
 ############### 4. Importing CSV Data (ignoring extra columns
 -- CSV has 5 columns while your table has 6. This ignores that extra column
   
@@ -68,6 +69,15 @@ IGNORE 1 ROWS
 SET 
   id = NULL,              -- Generates Auto-Increment. This column is not in CSV. Adding this makes the column ignored in the Import Phase
 
+
+
+
+############### 4. Creating an exact copy of a table
+-- Faster than using with INSERT INTO
+-- Useful for Staging 
+  
+CREATE TABLE `new_table_name` AS
+SELECT * FROM `table_to_copy`;
 
 
 
