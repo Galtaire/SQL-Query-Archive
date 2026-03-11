@@ -93,7 +93,7 @@ SELECT SUBSTRING_INDEX(`string or column_name`, delimiter, number)
 -- SUBSTRING(string, start, length)
 -- LOCATE(substring, string, start)
 	
-SELECT SUBSTRING(vessel_key, LOCATE('_', vessel_key) + 1) 
+SELECT SUBSTRING(string, LOCATE(substring, string, start) length) 
 
 -- SELECT SUBSTRING(`column_name`, LOCATE(`substring`, `string`), length)
 -- This basically means that LOCATE(`substring`, `string`) becomes the "start" value of Substring because LOCATE will return a position number of a string
