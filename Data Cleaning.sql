@@ -110,6 +110,9 @@ SELECT SUBSTRING(string, LOCATE(substring, string, start) length)
 SELECT STR_TO_DATE(`column_name`, '%m/%d/%Y')
 FROM table
 
+UPDATE table
+SET column1 = STR_TO_DATE(column1, '%Y-%m-%d'),
+
 ###########################################################################################################################################################################
 
 
