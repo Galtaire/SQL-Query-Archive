@@ -129,7 +129,9 @@ SET column1 = NULLIF(TRIM(column1), '');
 
 ###########################################################################################################################################################################
 
-
-
-
+######### 8. Standardizing values in a column (e.g. google = Google)
+	
+UPDATE table_name
+SET `column1` = CONCAT(UPPER(LEFT(column1,1)), LOWER(SUBSTRING(column1,2)));
+ -- 1 being the first letter and 2 being the second letter
 
