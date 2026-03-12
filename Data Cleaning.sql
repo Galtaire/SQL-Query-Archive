@@ -62,8 +62,8 @@ WHERE t1.column3 IS NULL
 -- Note: In this case, no need to put the column name aafter FIRST. This already makes the generated column first. (best for making Primary Keys) 
 
 ALTER TABLE table_name
-ADD `column_name` data_type
-PRIMARY KEY FIRST;
+ADD COLUMN `id` INT AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (`id`);
 
 -- Use the AFTER statement to put the column after an established column 
 -- This puts the generated column after the specified column in AFTER. 
