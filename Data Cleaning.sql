@@ -105,13 +105,24 @@ SELECT SUBSTRING(string, LOCATE(substring, string, start) length)
 
 ###########################################################################################################################################################################
 
-######### 7. Convert a Date VARCHAR datatype to a DATE Datatype
+######### 7. Convert a Date VARCHAR datatype to a DATE Datatype |||||||||| Convert Blanks ('') into NULL Values
 
-SELECT STR_TO_DATE(`column_name`, '%m/%d/%Y')
-FROM table
-
+	-- VARCHAR to DATE
 UPDATE table
 SET column1 = STR_TO_DATE(column1, '%Y-%m-%d'),
+
+------------------------------------------------------------------------------------------------------------------- 
+
+	-- Blanks to NULL
+UPDATE table_name
+SET column1 = NULLIF(column1, '');
+
+------------------------------------------------------------------------------------------------------------------- 
+
+	-- Trim + Converting Blanks to NULL
+
+UPDATE table_name
+SET column1 = NULLIF(TRIM(column1), '');
 
 ###########################################################################################################################################################################
 
