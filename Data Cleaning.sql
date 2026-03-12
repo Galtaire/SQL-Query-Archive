@@ -109,7 +109,10 @@ SELECT SUBSTRING(string, LOCATE(substring, string, start) length)
 
 	-- VARCHAR to DATE
 UPDATE table
-SET column1 = STR_TO_DATE(column1, '%Y-%m-%d'),
+SET column1 = STR_TO_DATE(column1, '%Y-%m-%d');
+
+ALTER TABLE table
+MODIFY COLUMN column1 DATE;
 
 ------------------------------------------------------------------------------------------------------------------- 
 
