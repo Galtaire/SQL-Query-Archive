@@ -56,7 +56,7 @@ SET `port_location` = ST_GeomFromGeoJSON(@temp_port_location);
 
 
 ############### 4. Importing CSV Data (ignoring extra columns
--- CSV has 5 columns while your table has 6. This ignores that extra column
+-- CSV has 5 columns while your MySQL table has 6. This ignores that extra column
   
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/file_name' 
 INTO TABLE `your_table`
