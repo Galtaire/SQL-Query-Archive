@@ -82,7 +82,32 @@ SELECT * FROM `table_to_copy`;
 
 
 
+############### 5. Assigning Primary and Foreign Keys 
 
+-- Primary Key:
+ALTER TABLE table_name
+MODIFY COLUMN `column1` INT AUTO_INCREMENT,
+ADD PRIMARY KEY (`column1`);
+
+-- Foreign Key: 
+ALTER TABLE table_name1
+ADD CONSTRAINT constraint_name
+    FOREIGN KEY (`fk_column`) REFERENCES table_name2 (`column1`)
+    ON DELETE SET NULL ON UPDATE CASCADE,
+
+-- Primary + Foreign Key: 
+
+ALTER TABLE table_name1
+MODIFY COLUMN `column1` INT AUTO_INCREMENT,
+ADD PRIMARY KEY (`column1`),
+  
+ADD CONSTRAINT constraint_name
+FOREIGN KEY (`fk_column`) REFERENCES table_name2 (column1)
+ON DELETE SET NULL ON UPDATE CASCADE,
+
+-- ON DELETE RESTRICT ON UPDATE CASCADE 
+  -- ON DELETE updates the Foreign Key table when the Primary key table is updated (e.g. deleted a row or change an ID Number)
+  -- ON UPDATE CASCADE automatically updates the Foreign Key Table when an update is given to the primary key table. 
 
 
 
