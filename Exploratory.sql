@@ -1,3 +1,5 @@
+###########################################################################################################################################################################
+
 #################### 1. For analyzing Geometric Data Values 
 -- Returns the raw value and the readable value. Useful when the GeoJSON Data/Geometry Data returns "BLOB"
 -- the difference between a Point and a LineString is essentially the difference between a "destination" and a "journey."
@@ -31,4 +33,19 @@ FROM table_name;
 --    The very last point (the destination)
 
 -- By wrapping it like this: ST_X(ST_PointN(column_name, 1)), you are saying: "Find the Route LineString." - "Pick the First Point (Point 1)." - "Now, tell me the Longitude (X) of just that one point."
+
+###########################################################################################################################################################################
+
+#################### 2. COALESCE: It goes through a list of values from left to right and stops the moment it finds one that is not empty (NULL).
+-- Imagine you are building a contact list for a marketing campaign. You want to reach the customer by any means necessary. 
+-- You prefer their Mobile Number, but if they didn't provide one, you'll take their Home Phone. 
+-- If they didn't provide that either, you'll just show "No Contact Available."
+
+SELECT 
+    customer_name,
+    COALESCE(mobile_phone, home_phone, 'No Contact Available') AS "Primary_Contact"
+FROM customers;
+
+-- Prevents "Math Crashes": In SQL, 5 + NULL = NULL. By using COALESCE(column, 0), you turn that NULL into a zero so your addition and division actually work.
+-- Data Tiering: It allows you to set a hierarchy of backups (e.g., Use Office Phone → If NULL, use Mobile → If NULL, use Home).
 
