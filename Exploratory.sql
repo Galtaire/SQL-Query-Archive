@@ -40,12 +40,23 @@ FROM table_name;
 -- Imagine you are building a contact list for a marketing campaign. You want to reach the customer by any means necessary. 
 -- You prefer their Mobile Number, but if they didn't provide one, you'll take their Home Phone. 
 -- If they didn't provide that either, you'll just show "No Contact Available."
-
+  
 SELECT 
     customer_name,
-    COALESCE(mobile_phone, home_phone, 'No Contact Available') AS "Primary_Contact"
+    COALESCE(mobile_phone, home_phone, 'No Contact Available')
 FROM customers;
+
+-- LOGIC: Use Office Phone → If NULL, use Mobile → If NULL, use Home
 
 -- Prevents "Math Crashes": In SQL, 5 + NULL = NULL. By using COALESCE(column, 0), you turn that NULL into a zero so your addition and division actually work.
 -- Data Tiering: It allows you to set a hierarchy of backups (e.g., Use Office Phone → If NULL, use Mobile → If NULL, use Home).
+
+-- In a traditional IF-THEN (or CASE statement), you usually check for a specific condition (like Price > 100). 
+-- COALESCE is a specialized, high-speed version of that logic that is hard-coded to only check for one thing: "Is this value missing?"
+-- Think of it as a Waterfall. Your data "falls" through a series of buckets. If a bucket is empty (NULL), the data keeps falling until it hits a bucket that actually has something in it.
+
+###########################################################################################################################################################################
+
+
+
 
