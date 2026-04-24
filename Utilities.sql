@@ -112,4 +112,50 @@ ON DELETE SET NULL ON UPDATE CASCADE,
 
 
 
+############### 6. Importing data without getting error 
+-- Getting an error where data from CSV is present but MySQL shows otherwise
+-- This LOAD DATA INFILE query can fix that
+-- This makes the column with the error imported as a variable
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/file_name'
+INTO TABLE `table_name`
+CHARACTER SET utf8mb4
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS
+(
+  `column1`
+  `column2`,
+  @variable1, -- Variable for numeric handling
+  `column4`
+  `column5`
+  @variable2, -- Variable for datetime handling
+  )
+SET   `column3` = NULLIF(@variable1, ''), -- Convert empty strings to NULL for Numbers/Dates
+      `column4` = NULLIF(@variable2, ''); -- Convert empty strings to NULL for Numbers/Dates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
